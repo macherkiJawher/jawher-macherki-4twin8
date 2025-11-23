@@ -1,33 +1,24 @@
 pipeline {
 
- agent any
+    agent any
 
- 
+    triggers {
+        githubPush()
+    }
 
- stages {
+    stages {
 
- stage('GIT') {
+        stage('GIT') {
+            steps {
+                git branch: 'master',
+                url: 'https://github.com/macherkiJawher/jawher-macherki-4twin8.git'
+            }
+        }
 
-           steps {
-
-               git branch: 'master',
-
-               url: ' https://github.com/macherkiJawher/jawher-macherki-4twin8.git'
-
-          }
-
-     }
-
- stage ('Compile Stage') {
-
- steps {
-
- sh 'mvn clean compile'
-
- }
-
- }
-
- }
-
+        stage ('Compile Stage') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+    }
 }
